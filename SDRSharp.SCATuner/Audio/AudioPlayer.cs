@@ -41,13 +41,16 @@ namespace SDRSharp.SCATuner
             }
         }
 
-        public double frequency, lcutoff, hcutoff;
-        public void FilterConfigure(double frequency)
+        public double SCAFrequency
         {
-            this.frequency = frequency;
+            set
+            {
+                this._scaFrequency = value;
+            }
         }
 
         private const float OutputLatency = 0.1f;
+
         private FloatFifoStream _audioStream;
         private AudioProcessor _audioProcessor;
         private WavePlayer _wavePlayer;
@@ -63,6 +66,7 @@ namespace SDRSharp.SCATuner
         private int _maxBufferSize;
         private double _sampleRate;
         private int _inputLength;
+        private double _scaFrequency;
         
         //Audio out
         private UnsafeBuffer audioBuffer;
@@ -117,6 +121,12 @@ namespace SDRSharp.SCATuner
             this._bufferSize = 0;
         }
 
+        /// <summary>
+        /// This method is called whenever SDR# gives samples to it
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="samplerate"></param>
+        /// <param name="length"></param>
         private unsafe void AudioSamplesIn(float* buffer, double samplerate, int length)
         {
             if (this._wavePlayer == null || samplerate != this._sampleRate)
@@ -131,8 +141,8 @@ namespace SDRSharp.SCATuner
 
 
                 //We multiplay our Length by 0.1 so audio device doesn't run out of samples (hear silence when that happens)
-                this._inputLength = (int)(this._sampleRate*0.1);
-                this._outputLength = (int)(this._sampleRateOut*0.1);
+                this._inputLength = (int)(this._sampleRate*OutputLatency);
+                this._outputLength = (int)(this._sampleRateOut*OutputLatency);
 
                 #region Initialize buffers
                 //Input buffer
@@ -155,7 +165,7 @@ namespace SDRSharp.SCATuner
                 //Configure resampler
                 this._resampler = new Resampler(this._sampleRate, this._sampleRateOut);
 
-
+                #region Init Audio player
                 if (this._wavePlayer != null)
                 {
                     this._wavePlayer.Dispose();
@@ -168,12 +178,16 @@ namespace SDRSharp.SCATuner
                 this._lostBuffers++;
                 return;
             }
+            #endregion
 
-            this._audioStream.Write(buffer, length); //Send stream to audio device
-            
-            
+            this._audioStream.Write(buffer, length); //Send samples to a intermediate FIFO buffer, where PlayerProcess will later take them from 
         }
 
+        /// <summary>
+        /// This method is called whenever soundcard wants samples (you should feed them to it, else, you hear nothing)
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="length"></param>
         private unsafe void PlayerProcess(float* buffer, int length)
         {
             if (this._audioStream == null)
@@ -192,9 +206,9 @@ namespace SDRSharp.SCATuner
             }
 
             //Change Subsidiary communications authority frequency
-            sca.reConfigure(this.frequency);
+            sca.reConfigure(this._scaFrequency);
 
-            //Read the audiostream into InputBufferPtr (InputBufferPtr holds our audio direcly from SDR#)
+            //Read the audiostream (samples) into InputBufferPtr (InputBufferPtr holds our audio direcly from SDR#)
             this._audioStream.Read(this._InputBufferPtr, this._inputLength);
 
             //Process Subsidiary communications authority

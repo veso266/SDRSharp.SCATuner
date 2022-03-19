@@ -178,10 +178,10 @@ namespace SDRSharp.SCATuner
                 switch (radioButton.Text)
                 {
                     case "67 kHz":
-                        _player.FilterConfigure(67000.0); this.fineTunningCtrl.Value = 67000;
+                        _player.SCAFrequency = 67000.0; this.fineTunningCtrl.Value = 67000;
                         break;
                     case "92 kHz":
-                        _player.FilterConfigure(92000.0); this.fineTunningCtrl.Value = 92000;
+                        _player.SCAFrequency = 92000.0; this.fineTunningCtrl.Value = 92000;
                         break;
                 }
             }
@@ -189,7 +189,7 @@ namespace SDRSharp.SCATuner
 
         private void fineTunningCtrl_ValueChanged(object sender, EventArgs e)
         {
-            _player.FilterConfigure((double)this.fineTunningCtrl.Value);
+            _player.SCAFrequency = (double)this.fineTunningCtrl.Value;
             if (this.fineTunningCtrl.Value == 67000)
                 this.rb67.Checked = true;
             else if (this.fineTunningCtrl.Value == 92000)
