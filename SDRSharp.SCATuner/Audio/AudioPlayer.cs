@@ -224,11 +224,11 @@ namespace SDRSharp.SCATuner
 
         private unsafe void BoostOutput(float* buffer, int length)
         {
-            int start = (length - 1) * 2;
-            for (int i = length - 1; i >= 0; i--)
+            for (var i = length - 1; i >= 0; i--)
             {
-                buffer[start] = (buffer[start + 1] = buffer[i] * this._gain * 2);
-                start -= 2;
+                var sample = buffer[i] * this._gain * 2;
+                buffer[i * 2] = sample;             //Left Channel
+                buffer[i * 2 + 1] = sample;         //Right Channel
             }
         }
     }
