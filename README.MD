@@ -2,7 +2,7 @@
 This plugin allows you to listen to [SCA Audio](https://en.wikipedia.org/wiki/Subsidiary_communications_authority) channels hidden inside regular FM Broadcast stations  
  
 # How to install
-Download [dll](https://github.com/veso266/SDRSharp.SCATuner/releases/download/1.0/SDRSharp.SCATuner.dll) from release page
+Download [dll](https://github.com/veso266/SDRSharp.SCATuner/releases/download/1.1/SDRSharp.SCATuner.dll) from release page
 ## For latest SDR#
 You just copy dll into Plugins directory and enjoy
 ## For SDR# 1785 and below 
