@@ -144,6 +144,9 @@ namespace SDRSharp.SCATuner
         {
             this.disbalanceLabel.Text = string.Format("Lost buffers {0:f0}", this._player.LostBuffers);
             this.bufferProgressBar.Value = this._player.BufferSize;
+
+            //Show user what internal sapmle rate we have
+            this.SampleRateLbl.Text = String.Format("Sample rate: {0} kHz", this._player.InternalSampleRate);
         }
 
         private void audioDeviceComboBox_SelectedIndexChanged(object sender, EventArgs e)

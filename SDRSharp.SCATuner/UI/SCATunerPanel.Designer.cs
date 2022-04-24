@@ -47,6 +47,7 @@ namespace SDRSharp.SCATuner
             this.auxAudioEnableCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.audioDeviceComboBox = new System.Windows.Forms.ComboBox();
+            this.SampleRateLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SCAGroup.SuspendLayout();
@@ -110,6 +111,7 @@ namespace SDRSharp.SCATuner
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.SampleRateLbl);
             this.groupBox1.Controls.Add(this.SCAGroup);
             this.groupBox1.Controls.Add(this.auxAudioEnableCheckBox);
             this.groupBox1.Controls.Add(this.label1);
@@ -121,7 +123,7 @@ namespace SDRSharp.SCATuner
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(4, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 277);
+            this.groupBox1.Size = new System.Drawing.Size(200, 315);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
@@ -243,13 +245,23 @@ namespace SDRSharp.SCATuner
             this.audioDeviceComboBox.TabIndex = 0;
             this.audioDeviceComboBox.SelectedIndexChanged += new System.EventHandler(this.audioDeviceComboBox_SelectedIndexChanged);
             // 
+            // SampleRateLbl
+            // 
+            this.SampleRateLbl.AutoSize = true;
+            this.SampleRateLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.SampleRateLbl.Location = new System.Drawing.Point(6, 282);
+            this.SampleRateLbl.Name = "SampleRateLbl";
+            this.SampleRateLbl.Size = new System.Drawing.Size(123, 20);
+            this.SampleRateLbl.TabIndex = 11;
+            this.SampleRateLbl.Text = "Sample Rate: ";
+            // 
             // SCATunerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Name = "SCATunerPanel";
-            this.Size = new System.Drawing.Size(204, 286);
+            this.Size = new System.Drawing.Size(204, 332);
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -277,5 +289,6 @@ namespace SDRSharp.SCATuner
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown fineTunningCtrl;
+        private System.Windows.Forms.Label SampleRateLbl;
     }
 }

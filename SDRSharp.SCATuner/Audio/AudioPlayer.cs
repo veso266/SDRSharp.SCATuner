@@ -41,6 +41,14 @@ namespace SDRSharp.SCATuner
             }
         }
 
+        public int InternalSampleRate
+        {
+            get
+            {
+                return (int)(this._sampleRate) / 1000;
+            }
+        }
+
         public double SCAFrequency
         {
             set
@@ -131,14 +139,9 @@ namespace SDRSharp.SCATuner
         {
             if (this._wavePlayer == null || samplerate != this._sampleRate)
             {
-                if (samplerate <= 0.0 || samplerate > 400000.0)
-                {
-                    return;
-                }
                 this._sampleRate = samplerate;
                 this._sampleRateOut = this.control.AudioSampleRate;
                 this._maxBufferSize = (int)this._sampleRate;
-
 
                 //We multiplay our Length by 0.1 so audio device doesn't run out of samples (hear silence when that happens)
                 this._inputLength = (int)(this._sampleRate*OutputLatency);
