@@ -1,4 +1,4 @@
-# SDRSharp.XDR
+# SDRSharp.SCATuner
 This plugin allows you to listen to [SCA Audio](https://en.wikipedia.org/wiki/Subsidiary_communications_authority) channels hidden inside regular FM Broadcast stations  
  
 # How to install
