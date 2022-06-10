@@ -19,4 +19,4 @@ You copy the plugin DLL into sdrsharp program directory and then edit plugins.xm
  
  ![SDRSharp.XDR](IMGS/Demonstration.PNG?raw=true "How it looks like when it works :)")
 
-[Usage + install tutorial](https://youtu.be/n5Ifg6ncn2Y) -- **Thanks to Double A Labs for his samples and this tutorial**
+[Usage + install tutorial](https://youtu.be/n5Ifg6ncn2Y) -- Thanks to **Double A Labs** for his samples and this tutorial
